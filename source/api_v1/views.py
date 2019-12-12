@@ -31,7 +31,7 @@ class IsPostOrIsAuthenticated(permissions.BasePermission):
 
 class QuotesViewSet(viewsets.ModelViewSet):
     permission_classes = [IsPostOrIsAuthenticated | DjangoModelPermissionsOrAnonReadOnly]
-    queryset = Quote.objects.all()
+    queryset = Quote.objects.none()
 
     def get_serializer_class(self):
         if self.action in ["update", "partial_update"]:
@@ -41,9 +41,9 @@ class QuotesViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         user = self.request.user
         if user.is_authenticated:
-            return Quote.objects.all()
+            return Quote.objects.all().order_by('-created_at')
         else:
-            return Quote.objects.filter(status='approved')
+            return Quote.objects.filter(status='approved').order_by('-created_at')
 
     @action(methods=['post'], detail=True)
     def rate_up(self, request, pk=None):
