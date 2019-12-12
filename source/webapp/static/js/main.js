@@ -17,7 +17,7 @@ function makeRequest(path, method, auth=true, data=null) {
         settings['contentType'] = 'application/json';
     }
     if (auth) {
-        request.headers['Authorization'] = 'Token ' + getToken();
+        settings.headers = {'Authorization': 'Token ' + getToken()};
     }
     return $.ajax(settings);
 }
