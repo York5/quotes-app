@@ -214,11 +214,3 @@ $(document).ready(function() {
     // if (!token) logIn('admin', 'admin');
 });
 
-// window.onload = function() {
-//     let request = makeRequest('quotes', 'get', false);
-//     request.done(function(data, status, response) {
-//         console.log(data);
-//     let token = getToken();
-//     if (!token) logIn('admin', 'admin');
-//     })
-// };
